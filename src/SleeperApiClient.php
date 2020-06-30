@@ -31,9 +31,19 @@ final class SleeperApiClient
     protected function get(string $path)
     {
         $response = $this->httpClient->request('GET', self::API_BASE . $path);
+        
+        if ($response->getStatusCode() !== 200) {
+            throw new SleeperApiException();
+        }
+        
         return json_decode($response->getContent(), true);
     }
 
+    /**
+     * @param string $leagueId
+     * @return array|SleeperLeague
+     * @throws SleeperApiException
+     */
     public function league(string $leagueId): SleeperLeague
     {
         $response = $this->get('/league/' . $leagueId);
@@ -43,6 +53,11 @@ final class SleeperApiClient
         return $serializer->denormalize($response, SleeperLeague::class);
     }
 
+    /**
+     * @param string $leagueId
+     * @return array|SleeperLeagueUser[]
+     * @throws SleeperApiException
+     */
     public function users(string $leagueId): array
     {
         $response = $this->get('/league/' . $leagueId . '/users');
@@ -52,6 +67,11 @@ final class SleeperApiClient
         return $serializer->denormalize($response, SleeperLeagueUser::class . '[]');
     }
 
+    /**
+     * @param string $leagueId
+     * @return array|SleeperRoster[]
+     * @throws SleeperApiException
+     */
     public function rosters(string $leagueId): array
     {
         $response = $this->get('/league/' . $leagueId . '/rosters');
