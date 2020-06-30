@@ -1,6 +1,9 @@
 # Sleeper API
 
 PHP library for interacting with the read-only [Sleeper fantasy football API](https://docs.sleeper.app/).
+
+![PHP Composer](https://github.com/danabrey/sleeper-api/workflows/PHP%20Composer/badge.svg)
+
 ## Installation
 
 `composer require danabrey/sleeper-api`
