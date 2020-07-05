@@ -1,11 +1,15 @@
 <?php
 namespace DanAbrey\SleeperApi;
 
+use DanAbrey\SleeperApi\Denormalizers\SleeperLeagueDenormalizer;
 use DanAbrey\SleeperApi\Models\SleeperLeague;
+use DanAbrey\SleeperApi\Models\SleeperLeagueSettings;
 use DanAbrey\SleeperApi\Models\SleeperLeagueUser;
 use DanAbrey\SleeperApi\Models\SleeperRoster;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -48,7 +52,7 @@ final class SleeperApiClient
     {
         $response = $this->get('/league/' . $leagueId);
 
-        $normalizers = [new ArrayDenormalizer(), new ObjectNormalizer()];
+        $normalizers = [new ArrayDenormalizer(), new SleeperLeagueDenormalizer()];
         $serializer = new Serializer($normalizers);
         return $serializer->denormalize($response, SleeperLeague::class);
     }
