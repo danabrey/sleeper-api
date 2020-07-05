@@ -31,6 +31,7 @@ class SleeperApiClientTest extends TestCase
         $this->assertInstanceOf(SleeperLeague::class, $league);
         $this->assertEquals('442097181638258688', $league->league_id);
         $this->assertEquals('Freddo', $league->name);
+        $this->assertCount(18, $league->roster_positions);
     }
 
     public function testUsers()
