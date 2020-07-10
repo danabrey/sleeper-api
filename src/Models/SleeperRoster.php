@@ -8,5 +8,5 @@ final class SleeperRoster
     /**
      * @var array|string[]
      */
-    public array $players;
+    public array $players = [];
 }

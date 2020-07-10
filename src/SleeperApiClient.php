@@ -2,6 +2,7 @@
 namespace DanAbrey\SleeperApi;
 
 use DanAbrey\SleeperApi\Denormalizers\SleeperLeagueDenormalizer;
+use DanAbrey\SleeperApi\Denormalizers\SleeperRosterDenormalizer;
 use DanAbrey\SleeperApi\Models\SleeperLeague;
 use DanAbrey\SleeperApi\Models\SleeperLeagueSettings;
 use DanAbrey\SleeperApi\Models\SleeperLeagueUser;
@@ -80,7 +81,7 @@ final class SleeperApiClient
     {
         $response = $this->get('/league/' . $leagueId . '/rosters');
 
-        $normalizers = [new ArrayDenormalizer(), new ObjectNormalizer()];
+        $normalizers = [new ArrayDenormalizer(), new SleeperRosterDenormalizer()];
         $serializer = new Serializer($normalizers);
         return $serializer->denormalize($response, SleeperRoster::class . '[]');
     }

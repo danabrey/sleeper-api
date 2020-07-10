@@ -70,4 +70,23 @@ class SleeperApiClientTest extends TestCase
         $this->assertIsArray($rosters[0]->players);
         $this->assertTrue(in_array('4098', $rosters[0]->players));
     }
+
+    public function testRostersWithEmptyRoster()
+    {
+        $data = file_get_contents(__DIR__ . '/_data/rosters-with-empty.json');
+        $responses = [
+            new MockResponse($data),
+        ];
+        $httpClient = new MockHttpClient($responses);
+        $this->client->setHttpClient($httpClient);
+
+        $rosters = $this->client->rosters('442097181638258688');
+
+        $this->assertIsArray($rosters);
+        $this->assertInstanceOf(SleeperRoster::class, $rosters[0]);
+        $this->assertEquals('419523462235701248', $rosters[0]->owner_id);
+
+        $this->assertIsArray($rosters[0]->players);
+        $this->assertCount(0, $rosters[0]->players);
+    }
 }
