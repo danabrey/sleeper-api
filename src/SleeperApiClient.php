@@ -36,11 +36,11 @@ final class SleeperApiClient
     protected function get(string $path)
     {
         $response = $this->httpClient->request('GET', self::API_BASE . $path);
-        
-        if ($response->getStatusCode() !== 200) {
+
+        if ($response->getStatusCode() !== 200 || $response->getContent() === 'null') {
             throw new SleeperApiException();
         }
-        
+
         return json_decode($response->getContent(), true);
     }
 
