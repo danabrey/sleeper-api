@@ -1,6 +1,6 @@
 {
   "name": "danabrey/sleeper-api",
-  "version": "0.3.4",
+  "version": "0.4",
   "description": "PHP library for interacting with the sleeper.app fantasy football API",
   "type": "library",
   "license": "MIT",
