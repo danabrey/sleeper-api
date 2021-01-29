@@ -16,6 +16,7 @@ class SleeperLeagueDenormalizer implements DenormalizerInterface
         $league = new SleeperLeague();
 
         $league->league_id = $data['league_id'];
+        $league->previous_league_id = $data['previous_league_id'];
         $league->name = $data['name'];
         $league->roster_positions = $data['roster_positions'];
 

@@ -3,6 +3,7 @@
 use DanAbrey\SleeperApi\Models\SleeperLeague;
 use DanAbrey\SleeperApi\Models\SleeperLeagueUser;
 use DanAbrey\SleeperApi\Models\SleeperRoster;
+use DanAbrey\SleeperApi\Models\SleeperUser;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
@@ -33,6 +34,39 @@ class SleeperApiClientTest extends TestCase
         $this->assertEquals('Freddo', $league->name);
         $this->assertCount(18, $league->roster_positions);
         $this->assertInstanceOf(\DanAbrey\SleeperApi\Models\SleeperLeagueSettings::class, $league->settings);
+    }
+
+    public function testLeagues()
+    {
+        $data = file_get_contents(__DIR__ . '/_data/leagues.json');
+        $responses = [
+            new MockResponse($data),
+        ];
+        $httpClient = new MockHttpClient($responses);
+        $this->client->setHttpClient($httpClient);
+
+        $leagues = $this->client->leagues('442097181638258688', '2020');
+
+        $this->assertIsArray($leagues);
+        $this->assertInstanceOf(SleeperLeague::class, $leagues[0]);
+        $this->assertEquals('Juggernaut', $leagues[0]->name);
+    }
+
+    public function testUser()
+    {
+        $data = file_get_contents(__DIR__ . '/_data/user.json');
+        $responses = [
+            new MockResponse($data),
+        ];
+        $httpClient = new MockHttpClient($responses);
+        $this->client->setHttpClient($httpClient);
+
+        $user = $this->client->user('77434934499098624');
+
+        $this->assertInstanceOf(SleeperUser::class, $user);
+        $this->assertEquals('danabrey', $user->username);
+        $this->assertEquals('danabrey', $user->display_name);
+        $this->assertEquals('77434934499098624', $user->user_id);
     }
 
     public function testUsers()
