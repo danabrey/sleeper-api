@@ -32,6 +32,7 @@ class SleeperApiClientTest extends TestCase
         $this->assertInstanceOf(SleeperLeague::class, $league);
         $this->assertEquals('442097181638258688', $league->league_id);
         $this->assertEquals('Freddo', $league->name);
+        $this->assertEquals('2019', $league->season);
         $this->assertCount(18, $league->roster_positions);
         $this->assertInstanceOf(\DanAbrey\SleeperApi\Models\SleeperLeagueSettings::class, $league->settings);
     }
