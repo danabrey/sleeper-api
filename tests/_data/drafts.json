@@ -1,0 +1,56 @@
+[
+  {
+    "type": "linear",
+    "status": "pre_draft",
+    "start_time": 1651852800000,
+    "sport": "nfl",
+    "settings": {
+      "teams": 12,
+      "slots_wr": 3,
+      "slots_te": 1,
+      "slots_super_flex": 1,
+      "slots_rb": 2,
+      "slots_qb": 1,
+      "slots_flex": 2,
+      "slots_bn": 15,
+      "rounds": 5,
+      "reversal_round": 0,
+      "player_type": 1,
+      "pick_timer": 28800,
+      "nomination_timer": 60,
+      "enforce_position_limits": 1,
+      "cpu_autopick": 0,
+      "alpha_sort": 0
+    },
+    "season_type": "regular",
+    "season": "2022",
+    "metadata": {
+      "scoring_type": "dynasty_2qb",
+      "name": "Weird Flex, but ok",
+      "description": ""
+    },
+    "league_id": "784369892051832832",
+    "last_picked": 1643497443105,
+    "last_message_time": 1641370864455,
+    "last_message_id": "784369892051832833",
+    "draft_order": {
+      "662758699797921792": 3,
+      "624314970473078784": 8,
+      "600055104401362944": 4,
+      "579946920156368896": 10,
+      "520199246187245568": 12,
+      "516443155841073152": 5,
+      "485720762368389120": 1,
+      "463412219988668416": 11,
+      "447086058430001152": 9,
+      "414452630266327040": 2,
+      "413070637494456320": 7,
+      "384085970431160320": 6
+    },
+    "draft_id": "784369892051832833",
+    "creators": [
+      "485720762368389120"
+    ],
+    "created": 1641370864455
+  }
+]

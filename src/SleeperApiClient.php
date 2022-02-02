@@ -1,11 +1,14 @@
 <?php
 namespace DanAbrey\SleeperApi;
 
+use DanAbrey\SleeperApi\Denormalizers\SleeperDraftDenormalizer;
 use DanAbrey\SleeperApi\Denormalizers\SleeperLeagueDenormalizer;
 use DanAbrey\SleeperApi\Denormalizers\SleeperRosterDenormalizer;
+use DanAbrey\SleeperApi\Models\SleeperDraft;
 use DanAbrey\SleeperApi\Models\SleeperLeague;
 use DanAbrey\SleeperApi\Models\SleeperLeagueUser;
 use DanAbrey\SleeperApi\Models\SleeperRoster;
+use DanAbrey\SleeperApi\Models\SleeperTradedPick;
 use DanAbrey\SleeperApi\Models\SleeperUser;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
@@ -111,5 +114,34 @@ final class SleeperApiClient
         $normalizers = [new ArrayDenormalizer(), new SleeperRosterDenormalizer()];
         $serializer = new Serializer($normalizers);
         return $serializer->denormalize($response, SleeperRoster::class . '[]');
+    }
+
+    /**
+     * @param string $leagueId
+     * @return array|SleeperDraft[]
+     * @throws SleeperApiException
+     */
+    public function drafts(string $leagueId): array
+    {
+        $response = $this->get('/league/' . $leagueId . '/drafts');
+
+        $normalizers = [new ArrayDenormalizer(), new SleeperDraftDenormalizer()];
+        $serializer = new Serializer($normalizers);
+        return $serializer->denormalize($response, SleeperDraft::class . '[]');
+    }
+
+
+    /**
+     * @param string $leagueId
+     * @return array|SleeperTradedPick[]
+     * @throws SleeperApiException
+     */
+    public function tradedPicks(string $leagueId): array
+    {
+        $response = $this->get('/league/' . $leagueId . '/traded_picks');
+
+        $normalizers = [new ArrayDenormalizer(), new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers);
+        return $serializer->denormalize($response, SleeperTradedPick::class . '[]');
     }
 }
