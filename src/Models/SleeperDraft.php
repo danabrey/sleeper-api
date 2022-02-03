@@ -5,7 +5,7 @@ final class SleeperDraft
 {
     public string $type;
     public string $status;
-    public int $start_time;
+    public ?int $start_time = null;
     public string $season;
     public string $season_type;
     public SleeperDraftSettings $settings;
