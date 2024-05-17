@@ -16,9 +16,9 @@
   },
   "require": {
     "php": "^7.4|^8.0",
-    "symfony/serializer": "^5.1",
-    "symfony/http-client": "^5.1",
-    "symfony/property-access": "^5.1",
+    "symfony/serializer": "^5.1|^6.0|^7.0",
+    "symfony/http-client": "^5.1|^6.0|^7.0",
+    "symfony/property-access": "^5.1|^6.0|^7.0",
     "ext-json": "*"
   },
   "require-dev": {
