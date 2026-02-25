@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Serializer;
 
 class SleeperRosterDenormalizer implements DenormalizerInterface
 {
-    public function denormalize($data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $roster = new SleeperRoster();
 
@@ -23,8 +23,15 @@ class SleeperRosterDenormalizer implements DenormalizerInterface
         return $roster;
     }
 
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === SleeperRoster::class;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            SleeperRoster::class => true,
+        ];
     }
 }

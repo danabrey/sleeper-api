@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Serializer;
 
 class SleeperLeagueDenormalizer implements DenormalizerInterface
 {
-    public function denormalize($data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $league = new SleeperLeague();
 
@@ -28,8 +28,15 @@ class SleeperLeagueDenormalizer implements DenormalizerInterface
         return $league;
     }
 
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === SleeperLeague::class;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            SleeperLeague::class => true,
+        ];
     }
 }

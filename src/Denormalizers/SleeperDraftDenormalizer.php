@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Serializer;
 
 class SleeperDraftDenormalizer implements DenormalizerInterface
 {
-    public function denormalize($data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $draft = new SleeperDraft();
 
@@ -27,8 +27,15 @@ class SleeperDraftDenormalizer implements DenormalizerInterface
         return $draft;
     }
 
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === SleeperDraft::class;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            SleeperDraft::class => true,
+        ];
     }
 }
